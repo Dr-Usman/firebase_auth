@@ -18,9 +18,9 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
 
-  final _nameTextController = TextEditingController();
-  final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   children: <Widget>[
                     CustomTextField(
-                      controller: _nameTextController,
+                      controller: _nameController,
                       focusNode: _focusName,
                       validator: Validators.validateName,
                       keyboardType: TextInputType.name,
@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 16.0),
                     CustomTextField(
-                      controller: _emailTextController,
+                      controller: _emailController,
                       focusNode: _focusEmail,
                       validator: Validators.validateEmail,
                       keyboardType: TextInputType.emailAddress,
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 16.0),
                     CustomTextField(
                       isPassword: true,
-                      controller: _passwordTextController,
+                      controller: _passwordController,
                       focusNode: _focusPassword,
                       validator: Validators.validatePassword,
                       keyboardType: TextInputType.visiblePassword,
@@ -83,18 +83,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: CustomButton(
                                   title: 'Sign up',
                                   onTap: () async {
-                                    _updateProcessing(true);
-
                                     if (_registerFormKey.currentState!
                                         .validate()) {
+                                      _updateProcessing(true);
+
                                       User? user = await FirebaseHelper.instance
                                           .registerUsingEmailPassword(
-                                        name: _nameTextController.text.trim(),
-                                        email: _emailTextController.text
+                                        name: _nameController.text.trim(),
+                                        email: _emailController.text
                                             .toLowerCase()
                                             .trim(),
                                         password:
-                                            _passwordTextController.text.trim(),
+                                            _passwordController.text.trim(),
                                       );
 
                                       _updateProcessing(false);
@@ -104,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             .pushAndRemoveUntil(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProfilePage(user: user),
+                                                const ProfilePage(),
                                           ),
                                           (_) => false,
                                         );
@@ -114,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                   ],
                 ),
               )

@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  final User? user;
-  const ProfilePage({super.key, this.user});
+  const ProfilePage({super.key});
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -15,13 +14,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final bool _isSendingVerification = false;
   final bool _isSigningOut = false;
-  User? _currentUser;
 
-  @override
-  void initState() {
-    _currentUser = widget.user;
-    super.initState();
-  }
+  User? _currentUser = FirebaseHelper.instance.user;
 
   @override
   Widget build(BuildContext context) {

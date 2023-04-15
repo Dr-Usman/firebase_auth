@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: user != null ? const ProfilePage() : LoginPage(),
+      home: user != null ? const ProfilePage() : const LoginPage(),
     );
   }
 }
