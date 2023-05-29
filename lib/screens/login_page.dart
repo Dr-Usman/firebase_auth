@@ -126,6 +126,36 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 },
               ),
+              const SizedBox(height: 20),
+              CustomButton(
+                title: 'Sign In with Facebook',
+                onTap: () async {
+                  User? user = await FirebaseHelper.instance.signInWithGoogle();
+
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
+                  }
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomButton(
+                title: 'Sign In with Apple',
+                onTap: () async {
+                  User? user = await FirebaseHelper.instance.signInWithGoogle();
+
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
